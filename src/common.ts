@@ -402,3 +402,31 @@ export interface IWebhookCreate {
    */
   enabled_events?: string[];
 }
+
+export type FrequencyType = "month" | "year" | "week" | "quarter";
+
+export interface IProduct {
+  id: string;
+  administration_id: string;
+  description: string;
+  title: string | null;
+  identifier: string | null;
+  price: string;
+  currency: string;
+  frequency: number;
+  frequency_type: FrequencyType;
+  tax_rate_id: string;
+  ledger_account_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ISubscriptionTemplate {
+  id: string;
+  administration_id: string;
+  workflow_id: string;
+  document_style_id: string;
+  mergeable: boolean;
+  contact_can_update: boolean;
+  products: IProduct[];
+}

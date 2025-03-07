@@ -8,6 +8,7 @@ import {
   ISalesInvoice,
   ISalesInvoiceCreate,
   ISalesInvoiceState,
+  ISubscriptionTemplate,
   ITax,
   ITaxRateType,
   IWebhook,
@@ -369,4 +370,30 @@ export class Administration {
   }
 
   //endregion Webhooks
+
+  //////////////////////////  SUBSCRIPTION TEMPLATES  //////////////////////////
+  //region SubscriptionTemplates
+
+  /**
+   * Get all subscription templates
+   * @param params Pagination options
+   * @returns An array of subscription templates
+   */
+  public async subscriptionTemplates(
+    params?: PaginatedOptions
+  ): Promise<ISubscriptionTemplate[]> {
+    return await this.HTTP.GET<ISubscriptionTemplate[]>("subscription_templates", { params });
+  }
+
+  /**
+   * Get a checkout identifier for a subscription template
+   * @param id The ID of the subscription template
+   * @returns The checkout identifier
+   */
+  public async getSubscriptionTemplateCheckoutIdentifier(id: string): Promise<string> {
+    const response = await this.HTTP.GET(`subscription_templates/${id}/checkout_identifier`);
+    return response as string;
+  }
+
+  //endregion SubscriptionTemplates
 }
